@@ -17,6 +17,7 @@
         </activity>
         <activity android:name=".CollapsingToolbar"/>
         <activity android:name=".DynamicRadioGroup"/>
+        <activity android:name=".AdvancedRecyclerview"/>
     </application>
 
 </manifest>

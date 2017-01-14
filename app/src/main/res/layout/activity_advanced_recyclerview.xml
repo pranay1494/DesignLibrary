@@ -11,17 +11,13 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:layout_below="@+id/toolbar"
-        android:orientation="vertical">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/advanced_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-    </LinearLayout>
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/toolbar"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
 </RelativeLayout>
