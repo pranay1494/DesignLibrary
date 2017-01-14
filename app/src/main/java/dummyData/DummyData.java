@@ -21,7 +21,7 @@ public class DummyData {
     private void setImage() {
         for (int i=0;i<10;i++){
             RecyclerModel model = new RecyclerModel();
-            model.setImage(R.drawable.yamigautam);
+            model.setImage(R.drawable.img);
             data.add(model);
         }
     }
