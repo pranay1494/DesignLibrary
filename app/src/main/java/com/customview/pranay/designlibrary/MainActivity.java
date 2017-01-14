@@ -13,8 +13,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
 
-    String nameOfClasses[] = {"Collapsing Toolbar","Dynamic Radio Group"};
-    private Class classes[] = {CollapsingToolbar.class,DynamicRadioGroup.class};
+    String nameOfClasses[] = {"Collapsing Toolbar","Dynamic Radio Group","Advanced RecyclerView"};
+    private Class classes[] = {CollapsingToolbar.class,DynamicRadioGroup.class,AdvancedRecyclerview.class};
     private ListView listView;
 
     @Override
