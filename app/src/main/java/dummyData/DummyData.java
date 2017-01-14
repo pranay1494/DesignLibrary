@@ -25,7 +25,11 @@ public class DummyData {
             data.add(model);
         }
     }
-
+    public RecyclerModel getData(){
+        RecyclerModel model = new RecyclerModel();
+        model.setImage(R.drawable.img);
+        return model;
+    }
     public List<RecyclerModel> getImages() {
         return data;
     }

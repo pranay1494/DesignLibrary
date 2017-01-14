@@ -25,6 +25,7 @@ public class AdvancedRecyclerview extends AppCompatActivity{
     private List<RecyclerModel> list;
     private RecyclerviewAdapter adapter;
     private RelativeLayout layout;
+    private DummyData data;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class AdvancedRecyclerview extends AppCompatActivity{
         recyclerView = (RecyclerView) findViewById(R.id.advanced_recyclerview);
         layout = (RelativeLayout) findViewById(R.id.rlTop);
 
-        DummyData data = new DummyData();
+        data = new DummyData();
         list = data.getImages();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -54,27 +55,25 @@ public class AdvancedRecyclerview extends AppCompatActivity{
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                boolean[] proceed = dispalySnackBar(viewHolder.getAdapterPosition());
-                if(proceed[0]) {
-                    list.remove(viewHolder.getAdapterPosition());
-                    adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-                }
+                boolean proceed = dispalySnackBar(viewHolder.getAdapterPosition());
+                list.remove(viewHolder.getAdapterPosition());
+                adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
             }
         });
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
-    private boolean[] dispalySnackBar(final int position) {
-        final boolean[] remove = {true};
+    private boolean dispalySnackBar(final int position) {
         Snackbar snackbar = Snackbar.make(layout,"Undo Remove",Snackbar.LENGTH_SHORT).setAction("Undo", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                remove[0] = false;
+                list.add(position,data.getData());
                 adapter.notifyItemInserted(position);
+                recyclerView.scrollToPosition(position);
             }
         });
         snackbar.show();
-        return remove;
+        return false;
     }
 
     private void updateList(int initialPosition, int finalPosition) {
