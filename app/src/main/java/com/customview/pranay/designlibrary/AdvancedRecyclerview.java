@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.Collections;
 import java.util.List;
@@ -55,7 +56,7 @@ public class AdvancedRecyclerview extends AppCompatActivity{
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                boolean proceed = dispalySnackBar(viewHolder.getAdapterPosition());
+                dispalySnackBar(viewHolder.getAdapterPosition());
                 list.remove(viewHolder.getAdapterPosition());
                 adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
             }
@@ -72,6 +73,10 @@ public class AdvancedRecyclerview extends AppCompatActivity{
                 recyclerView.scrollToPosition(position);
             }
         });
+        snackbar.setActionTextColor(getColor(R.color.colorPrimary));
+        View sBarView = snackbar.getView();
+        TextView textView = (TextView) sBarView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(getColor(R.color.colorAccent));
         snackbar.show();
         return false;
     }
