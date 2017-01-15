@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -27,6 +28,7 @@ public class AdvancedRecyclerview extends AppCompatActivity{
     private RecyclerviewAdapter adapter;
     private RelativeLayout layout;
     private DummyData data;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,7 +37,9 @@ public class AdvancedRecyclerview extends AppCompatActivity{
 
         recyclerView = (RecyclerView) findViewById(R.id.advanced_recyclerview);
         layout = (RelativeLayout) findViewById(R.id.rlTop);
-
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         data = new DummyData();
         list = data.getImages();
 
