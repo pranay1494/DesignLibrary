@@ -1,15 +1,24 @@
 package com.customview.pranay.designlibrary;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
 
 /**
  * Created by Pranay on 04-01-2017.
@@ -25,13 +34,18 @@ import android.view.View;
  * the View to ensure the contents don’t overlay the system windows.
  */
 public class CollapsingToolbar extends AppCompatActivity {
-    Toolbar toolbar;
+    private Toolbar toolbar;
+    private ImageView ivCollapsingtoolbar;
+    private CollapsingToolbarLayout collapsingToolbar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collapsingtoolbar);
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        ivCollapsingtoolbar = (ImageView) findViewById(R.id.ivCollapsingtoolbar);
+
         setSupportActionBar(toolbar);
         if(getSupportActionBar()!=null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -43,20 +57,37 @@ public class CollapsingToolbar extends AppCompatActivity {
             }
         });
 
-        CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing);
+        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing);
         collapsingToolbar.setCollapsedTitleTextColor(Color.WHITE);
         collapsingToolbar.setExpandedTitleColor(getResources().getColor(android.R.color.white));
         collapsingToolbar.setTitle("Yes Did It");
+
+        setColors();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
+    private void setColors() {
+        Bitmap bitmap = ((BitmapDrawable) ivCollapsingtoolbar.getDrawable()).getBitmap();
+        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+            @Override
+            public void onGenerated(Palette palette) {
+                int primaryDark = getResources().getColor(R.color.colorPrimaryDark);
+                int primary = getResources().getColor(R.color.colorPrimary);
+                collapsingToolbar.setContentScrimColor(palette.getVibrantColor(primary));
+                collapsingToolbar.setStatusBarScrimColor(palette.getDarkVibrantColor(primaryDark));
+                collapsingToolbar.setCollapsedTitleTextColor(palette.getDarkMutedColor(primaryDark));
+                //setStatusbarcolor(palette.getDarkVibrantColor(primaryDark));
+            }
+        });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+    private void setStatusbarcolor(int darkVibrantColor) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            int color = ContextCompat.getColor(this, darkVibrantColor);
+
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(color);
+        }
     }
 
     @Override
