@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
@@ -32,6 +33,11 @@ import android.widget.ImageView;
  * but if you do: you need to make sure interactive elements (like buttons) aren’t hidden underneath them.
  * That’s what the default behavior of the android:fitsSystemWindows=“true” attribute gives you: it sets the padding of
  * the View to ensure the contents don’t overlay the system windows.
+ *
+ *
+ * when the Statusbar is transparent the layout will use its height. To prevent this we just need to: http://stackoverflow.com/questions/29907615/android-transparent-status-bar-and-actionbar
+    SOLUTION ONE:
+    Add this line android:fitsSystemWindows="true" in your layout view container of whatever you want to be placed bellow the Actionbar:
  */
 public class CollapsingToolbar extends AppCompatActivity {
     private Toolbar toolbar;
@@ -59,10 +65,11 @@ public class CollapsingToolbar extends AppCompatActivity {
 
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing);
         collapsingToolbar.setCollapsedTitleTextColor(Color.WHITE);
-        collapsingToolbar.setExpandedTitleColor(getResources().getColor(android.R.color.white));
-        collapsingToolbar.setTitle("Yes Did It");
+        collapsingToolbar.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
+//        collapsingToolbar.setTitle("Yes Did It");
 
         setColors();
+        setStatusBarTranslucent(true);
     }
 
     private void setColors() {
@@ -89,7 +96,13 @@ public class CollapsingToolbar extends AppCompatActivity {
             window.setStatusBarColor(color);
         }
     }
-
+    protected void setStatusBarTranslucent(boolean makeTranslucent) {
+        if (makeTranslucent) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        } else {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+    }
     @Override
     protected void onStart() {
         super.onStart();

@@ -6,6 +6,7 @@
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="240dp"
         android:fitsSystemWindows="true"
@@ -52,4 +53,28 @@
         <include layout="@layout/advanced_recyclerview_row"/>
     </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+
+    <!--<de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/img"
+        app:layout_anchor="@id/appBar"
+        app:layout_anchorGravity="bottom|center_horizontal"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"/>-->
+    <android.support.design.widget.FloatingActionButton
+        android:layout_height="100dp"
+        android:layout_width="100dp"
+        app:layout_anchor="@id/appBar"
+        android:background="@android:color/holo_blue_light"
+        app:layout_anchorGravity="bottom|center_horizontal"
+        android:src="@drawable/images"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:backgroundTint="@android:color/white"
+        android:layout_margin="16dp"
+        android:clickable="true"/>
+
 </android.support.design.widget.CoordinatorLayout>
