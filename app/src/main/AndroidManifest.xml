@@ -20,6 +20,7 @@
         <activity android:name=".DynamicRadioGroup"/>
         <activity android:name=".AdvancedRecyclerview"
             android:parentActivityName=".MainActivity"/>
+        <activity android:name=".ViewAnchoring"/>
     </application>
 
 </manifest>

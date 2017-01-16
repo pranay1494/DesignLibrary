@@ -67,12 +67,13 @@
     <android.support.design.widget.FloatingActionButton
         android:layout_height="100dp"
         android:layout_width="100dp"
-        app:layout_anchor="@id/appBar"
+        app:layout_anchor="@id/tool_bar"
         android:background="@android:color/holo_blue_light"
-        app:layout_anchorGravity="bottom|center_horizontal"
+        app:layout_anchorGravity="bottom"
         android:src="@drawable/images"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
+        android:layout_gravity="bottom"
         android:backgroundTint="@android:color/white"
         android:layout_margin="16dp"
         android:clickable="true"/>
